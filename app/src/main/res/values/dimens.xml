@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="floatingPadding">20dp</dimen>
+    <dimen name="viewMargin">25dp</dimen>
+    <dimen name="formVaueTopPadding">20dp</dimen>
+    <dimen name="IconDimensions">10dp</dimen>
+</resources>
