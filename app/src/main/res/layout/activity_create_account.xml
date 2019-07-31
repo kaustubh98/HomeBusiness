@@ -121,6 +121,7 @@
                     android:fontFamily="sans-serif"
                    android:layout_marginTop="@dimen/formVaueTopPadding"
                     android:text="Create Account"
+                    android:onClick="createAccount"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
