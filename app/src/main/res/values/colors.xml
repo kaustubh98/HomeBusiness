@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00695C</color>
+    <color name="colorPrimary">#00695c</color>
     <color name="colorPrimaryDark">#004D40</color>
-    <color name="colorAccent">#26A69A</color>
+    <color name="colorAccent">#26a69a</color>
     <color name="floatingActionButton">#0bb5a5</color>
 </resources>
