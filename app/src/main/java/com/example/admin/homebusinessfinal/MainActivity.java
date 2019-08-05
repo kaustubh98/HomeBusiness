@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     //handling click on profile icon
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this,Login.class);
+        Intent intent = new Intent(MainActivity.this,Profile.class);
         startActivity(intent);
         return super.onOptionsItemSelected(item);
     }

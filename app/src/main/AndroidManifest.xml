@@ -19,10 +19,14 @@
         <activity
             android:name=".Login"
             android:label="@string/welcome"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".CreateAccount"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CreateAccount"
             android:label="@string/welcome"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Profile"
+            android:label="@string/profile"
+            android:parentActivityName=".MainActivity" ></activity>
     </application>
 
 </manifest>
