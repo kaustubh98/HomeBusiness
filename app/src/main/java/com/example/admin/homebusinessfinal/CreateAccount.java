@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,11 +21,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class CreateAccount extends AppCompatActivity {
 
-    ProgressDialog progressDialog;
-
     //Firebase Variables
     private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
+
+    //other variables
+    EditText e_email,e_pass,e_name,e_contact,e_address,e_des;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,17 @@ public class CreateAccount extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //initialize firebase variables
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+
+        //initialize other variables
+        e_email = findViewById(R.id.email_create);
+        e_pass = findViewById(R.id.password_create);
+        e_name = findViewById(R.id.name);
+        e_address = findViewById(R.id.address);
+        e_contact = findViewById(R.id.contactNo);
+        e_des = findViewById(R.id.description);
 
         //signout if a user is signed in
         if(user != null){
@@ -53,39 +66,76 @@ public class CreateAccount extends AppCompatActivity {
 
     //create the account
     public void createAccount(View view){
-        progressDialog.show();
-
-        EditText e_email = findViewById(R.id.email_create);
         String email = e_email.getText().toString().trim();
-        EditText e_pass = findViewById(R.id.password_create);
         String pass = e_pass.getText().toString().trim();
-        EditText e_name = findViewById(R.id.name);
         String name = e_name.getText().toString().trim();
+        String address = e_address.getText().toString().trim();
+        String contact = e_contact.getText().toString().trim();
+        String des = e_des.getText().toString().trim();
 
         progressDialog.setMessage("Registering: "+name);
 
-        firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(),"Registered user",Toast.LENGTH_SHORT).show();
+        //create account only if entries in UI are validated
+        if(validateUI()){
+            progressDialog.show();
+            firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Registered user",Toast.LENGTH_SHORT).show();
 
-                }else {
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(),"Some error occured",Toast.LENGTH_SHORT).show();
+                    }else {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Some error occured",Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-            }
-        });
+            });
 
+        }
 
+    }
+
+    //validate the entries in UI
+    private boolean validateUI(){
+        String email = e_email.getText().toString().trim();
+        String pass = e_pass.getText().toString().trim();
+        String name = e_name.getText().toString().trim();
+        String address = e_address.getText().toString().trim();
+        String contact = e_contact.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            e_email.setError("Please Enter a valid Email Address");
+            return false;
+        }
+
+        if(TextUtils.isEmpty(pass) || pass.length()<6){
+            e_pass.setError("Please Enter Password of more than 6 characters");
+            return false;
+        }
+
+        if(TextUtils.isEmpty(name)){
+            e_name.setError("Please Enter name");
+            return false;
+        }
+
+        if(TextUtils.isEmpty(address)){
+            e_address.setError("Please Enter address");
+            return false;
+        }
+
+        if(TextUtils.isEmpty(contact) || !TextUtils.isDigitsOnly(contact) || contact.length()!=10){
+            e_contact.setError("Please Enter a valid contact number");
+            return false;
+        }
+
+        return true;
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(CreateAccount.this,MainActivity.class);
         startActivity(intent);
-        super.onBackPressed();
     }
 }

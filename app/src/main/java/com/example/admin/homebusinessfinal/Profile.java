@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +68,5 @@ public class Profile extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(Profile.this,MainActivity.class);
         startActivity(intent);
-        super.onBackPressed();
     }
 }
