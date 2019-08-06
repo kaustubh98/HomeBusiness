@@ -8,4 +8,7 @@
     <item
         android:id="@+id/item_viewBusiness"
         android:title="View Businesses" />
+    <item
+        android:id="@+id/item_signOut"
+        android:title="Sign Out" />
 </menu>
