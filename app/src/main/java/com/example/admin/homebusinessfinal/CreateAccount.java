@@ -18,12 +18,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateAccount extends AppCompatActivity {
 
     //Firebase Variables
     private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     //other variables
     EditText e_email,e_pass,e_name,e_contact,e_address,e_des;
@@ -43,6 +46,7 @@ public class CreateAccount extends AppCompatActivity {
         //initialize firebase variables
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
         //initialize other variables
         e_email = findViewById(R.id.email_create);
@@ -82,12 +86,19 @@ public class CreateAccount extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"Registered user",Toast.LENGTH_SHORT).show();
+                        //registration of user is successfull. Now we can add data
+                        progressDialog.setMessage("Storing Your Information...");
+                        storeData();
 
                     }else {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"Some error occured",Toast.LENGTH_SHORT).show();
+                        try{
+                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        }catch (NullPointerException ne){
+                            ne.printStackTrace();
+                            Toast.makeText(getApplicationContext(),"System Error Occured",Toast.LENGTH_SHORT).show();
+                        }
+
 
                     }
                 }
@@ -95,6 +106,41 @@ public class CreateAccount extends AppCompatActivity {
 
         }
 
+    }
+
+    //store the data entered by the user
+    private void storeData() {
+        try{
+            String email = e_email.getText().toString().trim();
+            String name = e_name.getText().toString().trim();
+            String address = e_address.getText().toString().trim();
+            String contact = e_contact.getText().toString().trim();
+            String des = e_des.getText().toString().trim();
+
+            if(TextUtils.isEmpty(des)){
+                des = "No description provided";
+            }
+
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            if(user!=null) {
+                DatabaseReference db = databaseReference.child(user.getUid());
+                db.child("Name").setValue(name);
+                db.child("Contact").setValue(contact);
+                db.child("Description").setValue(des);
+                db.child("Email").setValue(email);
+                db.child("Address").setValue(address);
+            }
+
+            progressDialog.dismiss();
+            Toast.makeText(this,"Successfully created Account",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CreateAccount.this,Profile.class);
+            startActivity(intent);
+
+        }catch(Exception e){
+            progressDialog.dismiss();
+            e.printStackTrace();
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
     //validate the entries in UI
