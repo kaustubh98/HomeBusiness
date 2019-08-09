@@ -36,8 +36,15 @@ public class Profile extends AppCompatActivity {
         //sign in if not already
         if(user==null){
             Intent intent = new Intent(Profile.this,Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
+    }
+
+    //add a new business
+    public void addBusiness(View view){
+        Intent intent = new Intent(Profile.this,AddBusiness.class);
+        startActivity(intent);
     }
 
     @Override

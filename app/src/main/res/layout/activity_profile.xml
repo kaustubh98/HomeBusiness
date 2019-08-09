@@ -34,6 +34,7 @@
                     android:layout_marginBottom="24dp"
                     android:layout_marginTop="24dp"
                     android:src="@drawable/profile_icon_white"
+                    android:onClick="viewProfilePicutre"
                     app:civ_border_color="@color/colorPrimaryDark"
                     app:civ_border_width="5dp"
                     app:civ_circle_background_color="#000000"
@@ -127,6 +128,7 @@
         android:layout_marginEnd="@dimen/floatingPadding"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="addBusiness"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/floating_action_cross" />
@@ -137,7 +139,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
             android:layout_width="match_parent"

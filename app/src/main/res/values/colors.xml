@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#004d40</color>
     <color name="colorAccent">#26a69a</color>
     <color name="floatingActionButton">#0bb5a5</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

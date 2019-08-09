@@ -24,9 +24,13 @@
             android:name=".CreateAccount"
             android:label="@string/welcome"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Profile"
+        <activity
+            android:name=".Profile"
             android:label="@string/profile"
-            android:parentActivityName=".MainActivity" ></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".AddBusiness"
+            android:label="@string/addbusiness"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

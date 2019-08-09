@@ -2,7 +2,17 @@
     <string name="app_name">HomeBusiness</string>
     <string name="welcome">Welcome</string>
     <string name="profile"></string>
+    <string name="addbusiness">Register Your Business</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- For categories -->
+    <string-array name="categories">
+        <item> </item>
+        <item>Desserts and Cakes</item>
+        <item>Food and Tiffin Services</item>
+        <item>Beauty Parlour</item>
+        <item>Art and Craft</item>
+        <item>Fashion and clothing</item>
+        <item>Education</item>
+        <item>Others</item>
+    </string-array>
 </resources>

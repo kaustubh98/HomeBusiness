@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,12 @@ public class MainActivity extends AppCompatActivity {
         //setup Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    //add business
+    public void addBusiness(View view){
+        Intent intent = new Intent(MainActivity.this,AddBusiness.class);
+        startActivity(intent);
     }
 
     //display the profile icon
