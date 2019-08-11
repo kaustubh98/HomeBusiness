@@ -1,7 +1,10 @@
 package com.example.admin.homebusinessfinal;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,9 +53,9 @@ public class AddBusiness extends AppCompatActivity {
         e_name = findViewById(R.id.busi_name);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle("Add your business");
+        progressDialog.setTitle("Registering your business");
         progressDialog.setIcon(R.drawable.icon);
-        progressDialog.setMessage("Registering your business...");
+        progressDialog.setMessage("Please wait...");
 
         //if not signed in, Sign in first
         if(user == null){
@@ -113,6 +116,20 @@ public class AddBusiness extends AppCompatActivity {
 
         if(TextUtils.isEmpty(cat)){
             Toast.makeText(this,"Please Select a Category",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //check for internet connection
+        try{
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+            if(info == null || !info.isConnected()){
+                Toast.makeText(this,"Please Check your Internet Connection",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
             return false;
         }
 
