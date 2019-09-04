@@ -1,11 +1,10 @@
-package com.example.admin.homebusinessfinal;
+package com.example.admin.homebusinessfinal.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.admin.homebusinessfinal.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -80,6 +80,7 @@ public class AddBusiness extends AppCompatActivity {
                 databaseReference.child("Name").setValue(name);
                 databaseReference.child("Description").setValue(des);
                 databaseReference.child("Location").setValue(location);
+                databaseReference.child("Owner").setValue(user.getUid());
                 progressDialog.dismiss();
                 Toast.makeText(this,"Registered your Business",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddBusiness.this,Profile.class);

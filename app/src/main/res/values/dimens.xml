@@ -4,4 +4,6 @@
     <dimen name="viewMargin">25dp</dimen>
     <dimen name="formVaueTopPadding">20dp</dimen>
     <dimen name="IconDimensions">10dp</dimen>
+    <dimen name="Padding_View_Side">15dp</dimen>
+    <dimen name="ListViewSize">60dp</dimen>
 </resources>

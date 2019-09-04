@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,20 +17,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".Activities.Login"
             android:label="@string/welcome"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".CreateAccount"
+            android:name=".Activities.CreateAccount"
             android:label="@string/welcome"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".Profile"
+            android:name=".Activities.Profile"
             android:label="@string/profile"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".AddBusiness"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity android:name=".Activities.AddBusiness"
             android:label="@string/addbusiness"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>
