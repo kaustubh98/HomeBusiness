@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/item_editProfile"
-        android:title=" Edit Profile" />
+        android:title=" Edit Name" />
     <item
         android:id="@+id/item_viewBusiness"
         android:title="View Businesses" />

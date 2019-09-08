@@ -1,7 +1,9 @@
 package com.example.admin.homebusinessfinal.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +145,58 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //edit name
+    public void editName(){
+       UpdateValue("Name",e_name);
+    }
+
+    //edit contact
+    public void editContact(View view){
+        UpdateValue("Contact",e_no);
+    }
+
+    //edit name
+    public void editAddress(View view){
+        UpdateValue("Address",e_address);
+    }
+
+    //edit name
+    public void editDescription(View view){
+        UpdateValue("Description",e_des);
+    }
+
+    private void UpdateValue(final String field, final TextView holder) {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(Profile.this);
+        alertDialog.setTitle("Edit "+field);
+
+        final EditText input = new EditText(Profile.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+        alertDialog.setIcon(R.drawable.icon);
+
+        alertDialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String value = input.getText().toString();
+                holder.setText(value);
+                databaseReference.child(field).setValue(value);
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile,menu);
@@ -152,6 +208,7 @@ public class Profile extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.item_editProfile:
+                editName();
                 break;
             case R.id.item_viewBusiness:
                 break;
